@@ -1,3 +1,8 @@
+# Rules 
+
+For every merge request include your name in the title after the title.
+Example - 3_files_created_John
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
