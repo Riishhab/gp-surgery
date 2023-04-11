@@ -1,7 +1,9 @@
 # Rules 
 
-For every merge request include your name in the title after the title.
-Example - 3_files_created_John
+1. For every merge request include your name in the title after the title.
+   Example - 3_files_created_John
+2. Follow a file naming pattern for components. For components that must be on every page like (header, back, footer etc) must have all lower case letters in the file name, whereas page specific ones can start with an upper case letter.
+
 
 # Getting Started with Create React App
 
