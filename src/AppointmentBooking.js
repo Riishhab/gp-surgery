@@ -1,27 +1,37 @@
 import './styles.scss';
-import React, { useState } from "react";
+import React from "react";
 
 function AppointmentBooking() {
-    const today = new Date().toISOString().split("T")[0];
+    const today = new Date(); //Gets todays date
+    const todayString = today.toISOString().split("T")[0]; //formats the date as a string using ISO 8601 format, T splits it between date and time then [0] selects the date
+    const nextWeek = new Date(); //Gets todays date
+    nextWeek.setDate(today.getDate() + 7); //adds 7 days onto todays date (exactly one week)
+    const nextWeekString = nextWeek.toISOString().split("T")[0]; //formats the date as a string using ISO 8601 format, T splits it between date and time then [0] selects the date
   return (
+      <div class="AppointmentBooking">
     <form method="post" action="/book-appointment">
+    <h1 class="govuk-heading-xl">
+  <span class="govuk-caption-xl">Appointment Booking</span>
+  Book an Appointment with us
+</h1>
     <fieldset class="govuk-fieldset">
   <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
     <h1 class="govuk-fieldset__heading">
-      Book an appointment
+      Enter Appointment Details
     </h1>
   </legend>
   <div class="govuk-form-group">
     <label class="govuk-label" for="appointment-date">
       Date
     </label>
-    <input class="govuk-input govuk-input--width-20" id="appointment-date" name="appointment-date" type="date" min={today}></input>
+    <input class="govuk-input govuk-input--width-20" id="appointment-date" name="appointment-date" type="date" min={todayString} max={nextWeekString}></input>
   </div>
   <div class="govuk-form-group">
     <label class="govuk-label" for="appointment-time">
       Time
     </label>
     <select class="govuk-select govuk-input--width-20" id="appointment-time" name="appointment-time">
+        <option>Select a Time</option>
         <option value="08:30">08:30</option>
         <option value="09:00">09:00</option>
         <option value="09:30">09:30</option>
@@ -42,7 +52,6 @@ function AppointmentBooking() {
         <option value="17:00">17:00</option>
         <option value="17:30">17:30</option>
         <option value="18:00">18:00</option>
-        <option value="18:30">18:30</option>
     </select>
   </div>
   <div class="govuk-form-group">
@@ -56,6 +65,7 @@ function AppointmentBooking() {
 </button>
 </fieldset>
     </form>
+    </div>
   );
 }
 
