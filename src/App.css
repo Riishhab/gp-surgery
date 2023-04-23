@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -45,6 +46,6 @@
 
 .AppointmentBooking{
     text-align: left;
-    padding-left: 475px;
+    padding-left: 28%;
     padding-top: 15px;
 }
