@@ -24,7 +24,7 @@ function AppointmentBooking() {
     <label class="govuk-label" for="appointment-date">
       Date
     </label>
-    <input class="govuk-input govuk-input--width-20" id="appointment-date" name="appointment-date" type="date" min={todayString} max={nextWeekString}></input>
+    <input class="govuk-input govuk-input--width-10" id="appointment-date" name="appointment-date" type="date" min={todayString} max={nextWeekString}></input>
   </div>
   <div class="govuk-form-group">
     <label class="govuk-label" for="appointment-time">
@@ -56,9 +56,9 @@ function AppointmentBooking() {
   </div>
   <div class="govuk-form-group">
     <label class="govuk-label" for="appointment-time">
-      Notes
+      If necessary please provide some notes
     </label>
-    <input class="govuk-input govuk-input--width-20" id="appointment-time" name="appointment-time" type="text" ></input>
+    <textarea class="govuk-textarea govuk-input--width-20" id="appointment-time" name="appointment-time" rows="5"></textarea>
   </div>
   <button class="govuk-button" data-module="govuk-button" type="submit">
   Confirm and Book
