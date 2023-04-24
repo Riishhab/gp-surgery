@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +36,16 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.footer {
+ position: fixed;
+ width: 100%;
+ bottom: 0;
+}
+
+.AppointmentBooking{
+    text-align: left;
+    padding-left: 28%;
+    padding-top: 15px;
 }

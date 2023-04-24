@@ -1,9 +1,11 @@
 import React from 'react'
 import './styles.scss';
 
+
+
 const footer = () => {
     return (
-        <footer class="govuk-footer " role="contentinfo">
+        <footer class="govuk-footer footer" role="contentinfo">
             <div class="govuk-width-container ">
             <div class="govuk-footer__meta">
                 <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
