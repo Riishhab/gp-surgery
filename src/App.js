@@ -7,10 +7,10 @@ import AppointmentTable from './AppointmentTable';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Header />
-      <Back />
-      <AppointmentTable />
+      {/* <Back /> */}
+      {/* <AppointmentTable /> */}
       <Footer />
     </div>
   );
