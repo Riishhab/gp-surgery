@@ -69,16 +69,16 @@ const Start = () => {
           <nav role="navigation" aria-labelledby="subsection-title">
             <ul className="govuk-list govuk-!-font-size-16">
               <li>
-                <a href="#">Related link</a>
+                <Link to="/">Related link</Link>
               </li>
               <li>
-                <a href="#">Related link</a>
+                <Link to="/">Related link</Link>
               </li>
               <li>
-                <a href="#" className="govuk-!-font-weight-bold">
+                <Link to="/" className="govuk-!-font-weight-bold">
                   More{" "}
                   <span className="govuk-visually-hidden">in Subsection</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
