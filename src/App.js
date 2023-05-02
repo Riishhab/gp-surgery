@@ -6,18 +6,33 @@ import {
   Link,
   Route,
   Routes,
+  useLocation,
 } from "react-router-dom";
 import AppointmentTable from "./AppointmentTable";
 import Confirmation from "./Confirmation";
 import Footer from "./footer";
 import Header from "./header";
+import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 import Start from "./Start";
+import Header2 from "./Header2";
+// import { useState } from "react";
 
 function App() {
+  // const [loggedIn, setLoggedIn] = useState(false);
+
+  // const login = () => {
+  //   setLoggedIn(true);
+  // };
+
+  // const logout = () => {
+  //   setLoggedIn(false);
+  // };
+
   return (
     <Router>
+      {/* {loggedIn ? <Header2 /> : <Header />} */}
       <Header />
       <main className="govuk-width-container govuk-!-margin-top-7 govuk-!-margin-bottom-7">
         <Routes>
@@ -25,7 +40,11 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="confirmation" element={<Confirmation />} />
-          {/* <AppointmentTable /> */}
+          <Route path="home" element={<Home />} />
+          <Route
+            path="patient-appointment-table"
+            element={<AppointmentTable />}
+          />
         </Routes>
       </main>
       <Footer />
