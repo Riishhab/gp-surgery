@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-
+// view notes function
 const handleNotes = (id) => {
     fetch(`/api/appointments/${id}/notes`)
       .then(response => response.json())
