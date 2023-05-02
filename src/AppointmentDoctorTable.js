@@ -12,8 +12,8 @@ const handleNotes = (id) => {
   };
   
 return (
-    <table>
-        <thead>
+    <table class="govuk-table">
+        <thead class="govuk-table__head">
             <tr class="govuk-table__row">
                 <th scope="col" class="govuk-table__header">Appointment ID</th>
                 <th scope="col" class="govuk-table__header">Date</th>
@@ -22,7 +22,7 @@ return (
                 <th scope="col" class="govuk-table__header">Doctor</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
             {/* it takes information from the array to display in the table */}
             {AppointmentTable.map(appointment =>(
                 //key is taking everything from the specific id
@@ -34,7 +34,7 @@ return (
                     <td class="govuk-table__cell">{appointment.patientName}</td>
                     <td class="govuk-table__cell">{appointment.doctorName}</td>
                     <td class="govuk-table__cell">
-                        <button onClick={() => handleNotes(appointment.id)}>Appointment Notes</button>
+                        <button class="govuk-button" onClick={() => handleNotes(appointment.id)}>Appointment Notes</button>
                     </td>
                 </tr>
             ))}
