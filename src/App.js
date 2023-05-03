@@ -1,22 +1,54 @@
-import './App.css';
-import './styles.scss';
-import Header from './header';
-import Back from './Back';
-import Footer from './footer';
-import AppointmentTable from './AppointmentTable';
-import WarningText from './warningtext';
-import CookieBanner from './cookiebanner';
+import "./App.css";
+import "./styles.scss";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Link,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import AppointmentTable from "./AppointmentTable";
+import Confirmation from "./Confirmation";
+import Footer from "./footer";
+import Header from "./header";
+import Home from "./Home";
+import Login from "./Login";
+import Signup from "./Signup";
+import Start from "./Start";
+import Header2 from "./Header2";
+// import { useState } from "react";
 
 function App() {
+  // const [loggedIn, setLoggedIn] = useState(false);
+
+  // const login = () => {
+  //   setLoggedIn(true);
+  // };
+
+  // const logout = () => {
+  //   setLoggedIn(false);
+  // };
+
   return (
-    <div className="App">
+    <Router>
+      {/* {loggedIn ? <Header2 /> : <Header />} */}
       <Header />
-      <CookieBanner />
-      <Back />
-      <WarningText />
-      <AppointmentTable />
+      <main className="govuk-width-container govuk-!-margin-top-7 govuk-!-margin-bottom-7">
+        <Routes>
+          <Route path="/" element={<Start />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="confirmation" element={<Confirmation />} />
+          <Route path="home" element={<Home />} />
+          <Route
+            path="patient-appointment-table"
+            element={<AppointmentTable />}
+          />
+        </Routes>
+      </main>
       <Footer />
-    </div>
+    </Router>
   );
 }
 
