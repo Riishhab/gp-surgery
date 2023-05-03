@@ -17,6 +17,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Start from "./Start";
 import Header2 from "./Header2";
+import AppointmentBooking from "./AppointmentBooking";
 // import { useState } from "react";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="signup" element={<Signup />} />
           <Route path="confirmation" element={<Confirmation />} />
           <Route path="home" element={<Home />} />
+          <Route path="booking" element={<AppointmentBooking />} />
           <Route
             path="patient-appointment-table"
             element={<AppointmentTable />}

@@ -1,9 +1,9 @@
 import './styles.scss';
 import React from "react";
-import footer from './footer';
+import Footer from './footer';
 import jq from 'jquery'
 import $ from 'jquery';
-import header from './header';
+import Header from './header';
 
 function AppointmentBooking() {
     const today = new Date(); //Gets todays date
@@ -35,7 +35,6 @@ function AppointmentBooking() {
 
   return (
       <div>
-      <header />
     <form class="AppointmentBooking">
     <h1 class="govuk-heading-xl">
   <span class="govuk-caption-xl">Appointment Booking</span>
@@ -92,7 +91,6 @@ function AppointmentBooking() {
 </button>
 </fieldset>
     </form>
-    <footer />
     </div>
   );
 }
