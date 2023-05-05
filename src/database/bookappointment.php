@@ -1,5 +1,4 @@
 <?php
-
 header('Access-Control-Allow-Origin: *');
 
 $date = $_POST['date'];
@@ -8,10 +7,20 @@ $notes = $_POST['notes'];
 
 $pdo = new \PDO("sqlite:gpwebsite.db");
 
-$sql = "INSERT INTO Appointment (appointmentNumber,NHSNumber,medicalLicenseNumber,dateOfAppointment,timeOfAppointment,appointmentNotes) VALUES (1234,1234,1234,'$date','$time','$notes')";
-
+// Query the Doctors table to find an available doctor
+$sql = "SELECT medicalLicenseNumber FROM Doctor WHERE medicalLicenseNumber NOT IN (SELECT medicalLicenseNumber FROM Appointment WHERE dateOfAppointment = ? AND timeOfAppointment = ?)";
 $stmt = $pdo->prepare($sql);
-$stmt->execute();
+$stmt->execute([$date, $time]);
+$row = $stmt->fetch();
 
-
+if (!$row) {
+    // There are no available doctors at the requested time and date
+    header("HTTP/1.1 400 Bad Request");
+} else {
+    // Assign the doctor to the new appointment
+    $doctor_id = $row['medicalLicenseNumber'];
+    $sql = "INSERT INTO Appointment (NHSNumber,medicalLicenseNumber, dateOfAppointment, timeOfAppointment, appointmentNotes) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([123, $doctor_id, $date, $time, $notes]);
+}
 ?>
