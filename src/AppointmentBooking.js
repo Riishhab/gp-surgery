@@ -14,7 +14,6 @@ function AppointmentBooking() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-      console.log("Button Pressed");
 
     const formData = {
       date: $("#appointment-date").val(),
