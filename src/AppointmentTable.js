@@ -5,7 +5,7 @@ function AppointmentTable() {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    fetch("/api/appointments")
+    fetch("http://localhost/gpsurgery/api.php")
       .then((response) => response.json())
       .then((data) => setAppointments(data))
       .catch((error) => console.error(error));
@@ -51,8 +51,12 @@ function AppointmentTable() {
       <tbody className="govuk-table__body">
         {appointments.map((appointment) => (
           <tr className="govuk-table__row" key={appointment.id}>
-            <td className="govuk-table__cell">{appointment.date}</td>
-            <td className="govuk-table__cell">{appointment.time}</td>
+            <td className="govuk-table__cell">
+              {appointment.dateOfAppointment}
+            </td>
+            <td className="govuk-table__cell">
+              {appointment.timeOfAppointment}
+            </td>
             <td className="govuk-table__cell">{appointment.patientName}</td>
             <td className="govuk-table__cell">{appointment.doctorName}</td>
             <td className="govuk-table__cell">

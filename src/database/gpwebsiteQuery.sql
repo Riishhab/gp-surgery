@@ -1,5 +1,5 @@
 -- CREATE TABLE Login_Credential (
---   accountNumber INTEGER PRIMARY KEY NOT NULL,
+--   accountNumber INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 --   username TEXT NOT NULL,
 --   hash TEXT NOT NULL,
 --   userType TEXT NOT NULL
@@ -65,7 +65,7 @@
 -- );
 
 -- CREATE TABLE Appointment (
---   appointmentNumber INTEGER PRIMARY KEY NOT NULL,
+--   appointmentNumber INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 --   NHSNumber INTEGER NOT NULL,
 --   medicalLicenseNumber INTEGER NOT NULL,
 --   dateOfAppointment DATE NOT NULL,
@@ -129,30 +129,30 @@
 
 -- INSERT INTO Patient (NHSNumber, forename, surname, personDOB, genderCode, postcode)
 -- VALUES
---   (1234567890, 'David', 'Brown', '1985-05-22', 'M', 'SW1A 0AA'),
---   (2345678901, 'Mary', 'Wilson', '1990-07-12', 'F', 'WC2N 5DU'),
---   (3456789012, 'Sarah', 'Lee', '1988-03-01', 'F', 'NW1 6XE'),
---   (4567890123, 'Chris', 'Garcia', '1995-12-29', 'M', 'EC1Y 8SY');
+--   (123456890, 'David', 'Brown', '1985-05-22', 'M', 'SW1A 0AA'),
+--   (234567901, 'Mary', 'Wilson', '1990-07-12', 'F', 'WC2N 5DU'),
+--   (345678012, 'Sarah', 'Lee', '1988-03-01', 'F', 'NW1 6XE'),
+--   (456789123, 'Chris', 'Garcia', '1995-12-29', 'M', 'EC1Y 8SY');
 
 -- INSERT INTO Appointment (appointmentNumber, NHSNumber, medicalLicenseNumber, dateOfAppointment, timeOfAppointment, appointmentNotes)
 -- VALUES
--- (1, 1234567890, 123456, '2023-04-01', '10:00:00', 'Patient complains of persistent headaches.'),
--- (2, 2345678901, 234567, '2023-04-02', '14:30:00', 'Patient requires follow-up for recent surgery.'),
--- (3, 3456789012, 345678, '2023-04-03', '16:45:00', 'Patient needs referral to specialist.'),
--- (4, 4567890123, 456789, '2023-04-04', '11:15:00', 'Patient reports chronic back pain.'),
--- (5, 1234567890, 234567, '2023-04-05', '09:00:00', 'Patient has a history of heart disease.'),
--- (6, 2345678901, 345678, '2023-04-06', '13:30:00', 'Patient is experiencing respiratory problems.'),
--- (7, 3456789012, 456789, '2023-04-07', '15:45:00', 'Patient is recovering from recent surgery.'),
--- (8, 4567890123, 123456, '2023-04-08', '12:15:00', 'Patient is due for a routine check-up.');
+-- (1, 123456890, 123456, '2023-04-01', '10:00:00', 'Patient complains of persistent headaches.'),
+-- (2, 234567901, 234567, '2023-04-02', '14:30:00', 'Patient requires follow-up for recent surgery.'),
+-- (3, 345678012, 345678, '2023-04-03', '16:45:00', 'Patient needs referral to specialist.'),
+-- (4, 456789123, 456789, '2023-04-04', '11:15:00', 'Patient reports chronic back pain.'),
+-- (5, 123456890, 234567, '2023-04-05', '09:00:00', 'Patient has a history of heart disease.'),
+-- (6, 234567901, 345678, '2023-04-06', '13:30:00', 'Patient is experiencing respiratory problems.'),
+-- (7, 345678012, 456789, '2023-04-07', '15:45:00', 'Patient is recovering from recent surgery.'),
+-- (8, 456789123, 123456, '2023-04-08', '12:15:00', 'Patient is due for a routine check-up.');
 
 
 -- INSERT INTO Patient_Record (patientNo, medicalRecords, NHSNumber, accountNumber)
 -- VALUES
--- (1, 'Medical records for patient 1', 1234567890, 10007),
--- (2, 'Medical records for patient 2', 2345678901, 10008),
--- (3, 'Medical records for patient 3', 3456789012, 10009),
--- (4, 'Medical records for patient 4', 4567890123, 10010),
--- (5, 'Medical records for patient 1', 1234567890, 10007);
+-- (1, 'Medical records for patient 1', 123456890, 10007),
+-- (2, 'Medical records for patient 2', 234567901, 10008),
+-- (3, 'Medical records for patient 3', 345678012, 10009),
+-- (4, 'Medical records for patient 4', 456789123, 10010),
+-- (5, 'Medical records for patient 1', 123456890, 10007);
 
 
 SELECT * FROM Login_Credential;

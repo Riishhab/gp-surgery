@@ -41,14 +41,14 @@ const Login = () => {
               id="user_id"
               className="govuk-input govuk-!-width-three-quarters"
               value=""
-              maxlength="22"
+              maxLength="22"
               aria-describedby="user_id-hint"
-              autocomplete="username"
+              autoComplete="username"
             />
           </div>
 
           <div className="govuk-form-group">
-            <label for="password" className="govuk-label">
+            <label htmlFor="password" className="govuk-label">
               {" "}
               Password{" "}
             </label>
@@ -58,7 +58,7 @@ const Login = () => {
               name="password"
               id="password"
               className="govuk-input govuk-!-width-three-quarters"
-              autocomplete="current-password"
+              autoComplete="current-password"
             />
           </div>
 
@@ -66,7 +66,7 @@ const Login = () => {
             type="submit"
             id="continue"
             className="govuk-button"
-            formnovalidate=""
+            formNoValidate=""
             data-module="govuk-button"
             data-prevent-double-click="true"
           >

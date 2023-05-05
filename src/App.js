@@ -17,6 +17,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Start from "./Start";
 import Header2 from "./Header2";
+import Appointment from "./Appointment";
 import AppointmentBooking from "./AppointmentBooking";
 // import { useState } from "react";
 
@@ -47,6 +48,7 @@ function App() {
             path="patient-appointment-table"
             element={<AppointmentTable />}
           />
+          <Route path="appointment" element={<Appointment />} />
         </Routes>
       </main>
       <Footer />
