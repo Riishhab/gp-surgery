@@ -8,7 +8,7 @@ $notes = $_POST['notes'];
 $pdo = new \PDO("sqlite:gpwebsite.db");
 
 // Query the Doctors table to find an available doctor
-$sql = "SELECT medicalLicenseNumber FROM Doctor WHERE medicalLicenseNumber NOT IN (SELECT medicalLicenseNumber FROM Appointment WHERE dateOfAppointment = ? AND timeOfAppointment = ?)";
+$sql = "SELECT medicalLicenseNumber FROM Doctor WHERE medicalLicenseNumber NOT IN (SELECT medicalLicenseNumber FROM Appointment WHERE dateOfAppointment = ? AND timeOfAppointment = ?) ORDER BY RANDOM()";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$date, $time]);
 $row = $stmt->fetch();
