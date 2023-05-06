@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles.scss";
 
 function Appointment() {
-  const [nhsNumber, setNhsNumber] = useState("");
-  const [date, setDate] = useState("");
+  const [NHSNumber, setNhsNumber] = useState("");
   const [appointments, setAppointments] = useState([]);
 
+  useEffect(() => {
+    fetch("http://localhost/gpsurgery/AdminAppointment.php")
+      .then((response) => response.json())
+      .then((data) => setAppointments(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch(
-      `/api/appointments?nhsNumber=${nhsNumber}&date=${date}`
+      `/api/appointments?nhsNumber=${NHSNumber}`
     );
     const data = await response.json();
     setAppointments(data);
@@ -19,7 +26,7 @@ function Appointment() {
     await fetch(`/api/appointments/${appointmentNumber}`, { method: "DELETE" });
     setAppointments((currentAppointments) =>
       currentAppointments.filter(
-        (appointment) => appointment.appointment_number !== appointmentNumber
+        (appointment) => appointment.appointmentNumber !== appointmentNumber
       )
     );
   };
@@ -39,19 +46,8 @@ function Appointment() {
             for="width-8"
             type="text"
             id="nhsNumber"
-            value={nhsNumber}
+            value={NHSNumber}
             onChange={(event) => setNhsNumber(event.target.value)}
-          />
-          <label className="govuk-label govuk-label--3" htmlFor="date">
-            Date of Appointment:
-          </label>
-          <input
-            className="govuk-label"
-            for="width-5"
-            type="date"
-            id="date"
-            value={date}
-            onChange={(event) => setDate(event.target.value)}
           />
           <button
             className="govuk-button"
@@ -91,29 +87,29 @@ function Appointment() {
             {appointments.map((appointment) => (
               <tr
                 className="govuk-table__row"
-                key={appointment.appointment_number}
+                key={appointment.appointmentNumber}
               >
                 <td className="govuk-table__row">
-                  {appointment.appointment_number}
+                  {appointment.appointmentNumber}
                 </td>
-                <td className="govuk-table__row">{appointment.nhs_number}</td>
+                <td className="govuk-table__row">{appointment.NHSNumber}</td>
                 <td className="govuk-table__row">
-                  {appointment.medical_license}
-                </td>
-                <td className="govuk-table__row">
-                  {appointment.date_of_appointment}
+                  {appointment.medicalLicenseNumber}
                 </td>
                 <td className="govuk-table__row">
-                  {appointment.time_of_appointment}
+                  {appointment.dateOfAppointment}
                 </td>
                 <td className="govuk-table__row">
-                  {appointment.appointment_notes}
+                  {appointment.timeOfAppointment}
+                </td>
+                <td className="govuk-table__row">
+                  {appointment.appointmentNotes}
                 </td>
                 <td className="govuk-table__row">
                   <button
                     className="govuk-button govuk-button--warning"
                     data-module="govuk-button"
-                    onClick={() => handleDelete(appointment.appointment_number)}
+                    onClick={() => handleDelete(appointment.appointmentNumber)}
                   >
                     Delete
                   </button>

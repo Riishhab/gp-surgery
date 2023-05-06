@@ -48,7 +48,7 @@ function App() {
             path="patient-appointment-table"
             element={<AppointmentTable />}
           />
-          <Route path="appointment" element={<Appointment />} />
+          <Route path="admin-appointment" element={<Appointment />} />
         </Routes>
       </main>
       <Footer />
