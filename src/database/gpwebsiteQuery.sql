@@ -1,6 +1,6 @@
 -- CREATE TABLE Login_Credential (
 --   accountNumber INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
---   username TEXT NOT NULL,
+--   username TEXT NOT NULL UNIQUE,
 --   hash TEXT NOT NULL,
 --   userType TEXT NOT NULL
 -- );

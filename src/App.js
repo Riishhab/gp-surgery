@@ -1,4 +1,3 @@
-import "./App.css";
 import "./styles.scss";
 import {
   BrowserRouter as Router,
