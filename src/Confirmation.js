@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Confirmation = () => {
+  const location = useLocation();
+  const username = location.state?.data;
+
   return (
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
@@ -10,7 +13,7 @@ const Confirmation = () => {
           <div class="govuk-panel__body">
             Your username is
             <br />
-            <strong>hdj5437</strong>
+            <strong>{username}</strong>
           </div>
         </div>
 
