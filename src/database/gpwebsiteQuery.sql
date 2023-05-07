@@ -154,6 +154,9 @@
 -- (4, 'Medical records for patient 4', 456789123, 10010),
 -- (5, 'Medical records for patient 1', 123456890, 10007);
 
+DELETE FROM patient_record
+WHERE patientNo = 8;
+
 
 SELECT * FROM Login_Credential;
 SELECT * FROM User_Information;
@@ -165,3 +168,13 @@ SELECT * FROM Patient_Record;
 
 -- /* Data for Vaccines table has not been created */
 
+INSERT INTO `patient` (`NHSNumber`, `forename`, `surname`, `personDOB`, `genderCode`, `postcode`) VALUES ('789789', 'Hanck', 'Doe', '1996-04-10', 'M', 'HD7 JT8');
+
+
+
+INSERT INTO `patient_record` (`medicalRecords`, `NHSNumber`, `accountNumber`) VALUES ('July 2020: Medical records of patient. Diagnosis: Hypertension. Prescription: Lisinopril 10mg, once daily. Allergies: Penicillin. Next Appointment: 2023-06-02, 2:00 PM. Notes: Patients blood pressure readings consistently above normal range. Started on Lisinopril to manage hypertension. Advised dietary changes and regular exercise. Informed patient about potential side effects and cautioned about allergic reaction to Penicillin. Emphasized the importance of regular follow-up visits to monitor blood pressure levels.', '789789', '10012');
+
+
+INSERT INTO `patient_record` (`patientNo`, `medicalRecords`, `NHSNumber`, `accountNumber`) VALUES (NULL, 'May 2022: Medical records of patient. Diagnosis: Acute respiratory infection. Prescription: Amoxicillin 500mg, three times daily for 7 days. Allergies: None. Next Appointment: 2023-05-15, 10:30 AM Notes: Patient presented with cough, fever, and shortness of breath. Chest X-ray showed signs of lung infection. Prescribed Amoxicillin for treatment. Advised patient to rest and drink plenty of fluids. Follow-up appointment scheduled for further evaluation.', '789789', '10012');
+
+INSERT INTO `patient_record` (`patientNo`, `medicalRecords`, `NHSNumber`, `accountNumber`) VALUES (NULL, 'September 2022: Medical records of patient. Diagnosis: Diabetes Mellitus Type 2. Prescription: Metformin 1000mg, twice daily. Allergies: None. Next Appointment: 2023-07-10, 9:00 AM. Notes: Patient diagnosed with Diabetes Mellitus Type 2. Prescribed Metformin for glycemic control. Discussed the importance of a balanced diet, regular exercise, and monitoring blood sugar levels. Scheduled follow-up appointment to assess treatment progress and adjust medication if needed.', '789789', '10012');
