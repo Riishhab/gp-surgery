@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import "./styles.scss";
 
@@ -76,4 +77,3 @@ function Appointment() {
 }
 
 export default Appointment;
-
