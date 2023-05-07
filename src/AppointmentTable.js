@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./styles.scss";
 
 function AppointmentTable() {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/gpsurgery/api.php")
+    fetch("http://localhost/gpsurgery/PatientAppointment.php")
       .then((response) => response.json())
       .then((data) => setAppointments(data))
       .catch((error) => console.error(error));

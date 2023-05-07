@@ -1,28 +1,85 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ErrorSummary from "@govuk-react/error-summary";
+import { hashPassword } from "./Hashing";
 
 const Signup = () => {
   const [data, setData] = useState({
-    username: "alexh",
-    password: "ioioioio",
-    confirmPassword: "ioioioio",
-    // userType: "Admin",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    userType: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [disMessage, setDisMessage] = useState("");
+
+  useEffect(() => {
+    if (errorMessage) {
+      window.scrollTo(0, 0); // Scroll to the top of the page
+    }
+  }, [errorMessage]);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost/gpsurgery/signup.php", {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+    if (data.username === "" || data.password === "" || data.userType === "") {
+      setErrorMessage("Invalid Inputs");
+      setDisMessage(
+        "Please enter a valid username, password and select a user type"
+      );
+    } else if (data.username.length < 3 || data.username.length > 15) {
+      setErrorMessage("Invalid Username");
+      setDisMessage(
+        "Username must be at least 3 characters long and less than 15 characters long"
+      );
+    } else if (data.password !== data.confirmPassword) {
+      setErrorMessage("Passwords do not match");
+      setDisMessage("Please enter the same password in both fields");
+    } else if (data.password.length < 8 || data.password.length > 16) {
+      setErrorMessage("Invalid Password");
+      setDisMessage("The password must be between 8 and 16 characters long");
+    } else {
+      console.log(data);
+
+      const requestData = {
+        username: data.username,
+        hash: hashPassword(data.password.toString()), // hashing password
+        userType: data.userType,
+      };
+
+      fetch("http://localhost/gpsurgery/signup.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(requestData),
       })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((response) => response.json())
+        .then((response) => {
+          if (response[0].status === "error") {
+            setErrorMessage("Login Failed");
+            setDisMessage(response[0].message);
+            console.log(response);
+          } else {
+            console.log(response);
+            navigate("/confirmation", { state: { data: data.username } });
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
+
+  /*
+  if(!preg_match('/[#\$\._!@&]/', $password)) {
+    echo json_encode(array("status" => "error", "message" => "Password should contain at least one special character (# $ . _ ! @ &)."));
+    exit();
+  }
+  */
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -31,15 +88,22 @@ const Signup = () => {
 
   return (
     <div className="govuk-grid-row">
+      {errorMessage && (
+        <ErrorSummary
+          description="Please fix the following issues:"
+          errors={[
+            {
+              targetName: "description",
+              text: disMessage,
+            },
+          ]}
+          heading={errorMessage}
+        />
+      )}
       <div className="govuk-grid-column-two-thirds">
         <h1 className="govuk-heading-xl">Enter your details</h1>
 
-        <form
-          className="form"
-          // action="/confirmation"
-          // method="POST"
-          onSubmit={handleSubmit}
-        >
+        <form className="form" onSubmit={handleSubmit}>
           <p className="govuk-body">
             This will only be used to create an account to use the GP Surgery
             Services.
@@ -106,7 +170,7 @@ const Signup = () => {
             />
           </div>
 
-          {/* <div className="govuk-form-group">
+          <div className="govuk-form-group">
             <fieldset className="govuk-fieldset">
               <legend className="govuk-fieldset__legend">
                 What is your role?
@@ -115,15 +179,15 @@ const Signup = () => {
                 <div className="govuk-radios__item">
                   <input
                     className="govuk-radios__input"
-                    id="patient"
+                    id="Patient"
                     name="userType"
                     type="radio"
-                    value={data.userType}
+                    value="Patient"
                     onChange={handleChange}
                   />
                   <label
                     className="govuk-label govuk-radios__label"
-                    htmlFor="patient"
+                    htmlFor="Patient"
                   >
                     Patient
                   </label>
@@ -131,15 +195,15 @@ const Signup = () => {
                 <div className="govuk-radios__item">
                   <input
                     className="govuk-radios__input"
-                    id="doctor"
+                    id="Doctor"
                     name="userType"
                     type="radio"
-                    value={data.userType}
+                    value="Doctor"
                     onChange={handleChange}
                   />
                   <label
                     className="govuk-label govuk-radios__label"
-                    htmlFor="doctor"
+                    htmlFor="Doctor"
                   >
                     Doctor
                   </label>
@@ -147,24 +211,28 @@ const Signup = () => {
                 <div className="govuk-radios__item">
                   <input
                     className="govuk-radios__input"
-                    id="admin"
+                    id="Admin"
                     name="userType"
                     type="radio"
-                    value={data.userType}
+                    value="Admin"
                     onChange={handleChange}
                   />
                   <label
                     className="govuk-label govuk-radios__label"
-                    htmlFor="admin"
+                    htmlFor="Admin"
                   >
                     Admin
                   </label>
                 </div>
               </div>
             </fieldset>
-          </div> */}
+          </div>
 
-          <button className="govuk-button" data-module="govuk-button">
+          <button
+            className="govuk-button"
+            type="submit"
+            data-module="govuk-button"
+          >
             Create an account
           </button>
         </form>

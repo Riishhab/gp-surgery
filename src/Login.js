@@ -1,9 +1,86 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserContext";
+import { Link, useNavigate } from "react-router-dom";
+import ErrorSummary from "@govuk-react/error-summary";
+import { comparePassword, hashPassword } from "./Hashing";
 
 const Login = () => {
+  const [data, setData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [disMessage, setDisMessage] = useState("");
+
+  useEffect(() => {
+    if (errorMessage) {
+      window.scrollTo(0, 0); // Scroll to the top of the page
+    }
+  }, [errorMessage]);
+
+  const navigate = useNavigate();
+
+  const { login } = useContext(UserContext);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (data.username === "" || data.password === "") {
+      setErrorMessage("Invalid Inputs");
+      setDisMessage("Please enter a valid username and password");
+    } else {
+      const requestData = {
+        username: data.username,
+        hash: hashPassword(data.password.toString()), // hashed password
+      };
+      fetch("http://localhost/gpsurgery/login.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(requestData),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          if (response[0].status === "error") {
+            setErrorMessage("Invalid Login");
+            setDisMessage("Please enter a valid username and password");
+            console.log(response);
+          } else {
+            if (comparePassword(data.password, response[0].storedHash)) {
+              console.log(response);
+              login(response[0].userType, response[0].accountNumber);
+              navigate("/home");
+            } else {
+              setErrorMessage("Invalid Login");
+              setDisMessage("Please enter a valid username and password");
+            }
+          }
+        });
+    }
+  };
+
+  const handleChange = (event) => {
+    setData({ ...data, [event.target.name]: event.target.value });
+    console.log(data);
+  };
+
   return (
-    <div className="govuk-grid-row govuk-width-container govuk-!-margin-top-1">
+    <div className="govuk-grid-row govuk-!-margin-top-1">
+      {errorMessage && (
+        <ErrorSummary
+          description="Please fix the following issues:"
+          errors={[
+            {
+              targetName: "description",
+              text: disMessage,
+            },
+          ]}
+          heading={errorMessage}
+        />
+      )}
+
       <div className="govuk-grid-column-two-thirds">
         <div
           className="govuk-notification-banner"
@@ -29,7 +106,7 @@ const Login = () => {
 
         <h1 className="govuk-heading-xl">Login to GP Surgery</h1>
 
-        <form className="form" action="/home" method="post">
+        <form className="form" onSubmit={handleSubmit}>
           <div className="govuk-form-group">
             <p className="govuk-label">Enter your username</p>
 
@@ -37,28 +114,30 @@ const Login = () => {
 
             <input
               type="text"
-              name="user_id"
+              name="username"
               id="user_id"
               className="govuk-input govuk-!-width-three-quarters"
-              value=""
-              maxLength="22"
+              value={data.username}
+              maxLength={15}
               aria-describedby="user_id-hint"
               autoComplete="username"
+              onChange={handleChange}
             />
           </div>
 
           <div className="govuk-form-group">
             <label htmlFor="password" className="govuk-label">
-              {" "}
-              Password{" "}
+              Password
             </label>
 
             <input
               type="password"
               name="password"
               id="password"
+              value={data.password}
               className="govuk-input govuk-!-width-three-quarters"
               autoComplete="current-password"
+              onChange={handleChange}
             />
           </div>
 
@@ -66,7 +145,7 @@ const Login = () => {
             type="submit"
             id="continue"
             className="govuk-button"
-            formNoValidate=""
+            // formNoValidate=""
             data-module="govuk-button"
             data-prevent-double-click="true"
           >
