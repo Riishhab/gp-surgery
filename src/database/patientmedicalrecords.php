@@ -3,14 +3,9 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Database configuration
-$dsn = 'mysql:host=localhost;dbname=gpsurgery';
-$username = 'root';
-$password = '';
-
 try {
     // Create a PDO instance
-    $pdo = new PDO($dsn, $username, $password);
+    $pdo = new \PDO("sqlite:gpwebsite.db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $accountNumber = $_GET['accountNumber'];

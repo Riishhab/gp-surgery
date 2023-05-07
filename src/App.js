@@ -63,9 +63,9 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="confirmation" element={<Confirmation />} />
-          <Route path="home" element={<Home />} />
           {isLoggedIn && userType === "Patient" && (
             <>
+              <Route path="home" element={<Home />} />
               <Route
                 path="patient-appointment"
                 element={<AppointmentTable />}
@@ -85,11 +85,13 @@ function App() {
                 element={<AppointmentTable />}
               /> */}
               {/* <Route path="booking" element={<AppointmentBooking />} /> */}
+              <Route path="home" element={<Home />} />
               <Route path="doctor-profile" element={<ProfileDoctor />} />
             </>
           )}
           {isLoggedIn && userType === "Admin" && (
             <>
+              <Route path="home" element={<Home />} />
               <Route path="admin-appointment" element={<Appointment />} />
               <Route path="admin-profile" element={<ProfileAdmin />} />
             </>
