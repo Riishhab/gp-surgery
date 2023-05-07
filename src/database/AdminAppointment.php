@@ -19,18 +19,14 @@ if (!$con) {
 switch ($method) {
     case 'GET':
         $sql = "SELECT
-          A.appointmentNumber,
-          A.NHSNumber,
-          A.medicalLicenseNumber,
-          A.dateOfAppointment,
-          A.timeOfAppointment,
-          A.appointmentNotes
-      FROM
-          appointment A
-      JOIN patient P ON
-          A.NHSNumber = P.NHSNumber
-      JOIN doctor D ON
-          A.medicalLicenseNumber = D.medicalLicenseNumber";
+                A.appointmentNumber,
+                A.NHSNumber,
+                A.medicalLicenseNumber,
+                A.dateOfAppointment,
+                A.timeOfAppointment,
+                A.appointmentNotes
+            FROM
+                Appointment A";
         break;
 }
 

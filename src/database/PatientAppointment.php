@@ -18,20 +18,18 @@ if (!$con) {
 
 switch ($method) {
   case 'GET':
-    $NHSNumber = $_GET['NHSNumber'];
+    $nhsNumber = mysqli_real_escape_string($con, $_GET['NHSNumber']);
     $sql = "SELECT
-                A.dateOfAppointment,
-                A.timeOfAppointment,
-                CONCAT(P.forename, ' ', P.surname) AS patientName,
-                CONCAT(D.firstName, ' ', D.lastName) AS doctorName
+              A.dateOfAppointment,
+              A.timeOfAppointment,
+              CONCAT(P.forename, ' ', P.surname) AS patientName,
+              CONCAT(D.firstName, ' ', D.lastName) AS doctorName
             FROM
-                appointment A
-            JOIN patient P ON
-                A.NHSNumber = P.NHSNumber
-            JOIN doctor D ON
-                A.medicalLicenseNumber = D.medicalLicenseNumber
+              appointment A
+              JOIN patient P ON A.NHSNumber = P.NHSNumber
+              JOIN doctor D ON A.medicalLicenseNumber = D.medicalLicenseNumber
             WHERE
-                A.NHSNumber = '$NHSNumber'";
+              A.NHSNumber = '$NHSNumber'";
     break;
 }
 
@@ -45,12 +43,23 @@ if (!$result) {
 }
 
 if ($method == 'GET') {
-  if (!$id)
+  // If no NHS number is provided, wrap the response in an array
+  if (!$nhsNumber)
     echo '[';
+
+  // Loop through the results and return a JSON object for each appointment
   for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-    echo ($i > 0 ? ',' : '') . json_encode(mysqli_fetch_object($result));
+    $row = mysqli_fetch_assoc($result);
+    echo ($i > 0 ? ',' : '') . json_encode([
+      'dateOfAppointment' => $row['dateOfAppointment'],
+      'timeOfAppointment' => $row['timeOfAppointment'],
+      'NHSNumber' => $row['NHSNumber'],
+      'medicalLicenseNumber' => $row['medicalLicenseNumber']
+    ]);
   }
-  if (!$id)
+
+  // Close the array if no NHS number is provided
+  if (!$nhsNumber)
     echo ']';
 } else {
   echo mysqli_affected_rows($con);
