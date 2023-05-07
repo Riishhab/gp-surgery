@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 
-const header = () => {
+const Header = () => {
   return (
     <header className="govuk-header " role="banner" data-module="govuk-header">
       <div className="govuk-header__container govuk-width-container">
@@ -49,4 +49,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
