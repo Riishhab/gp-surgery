@@ -19,6 +19,8 @@ import Start from "./Start";
 import Header2 from "./Header2";
 import Appointment from "./Appointment";
 import AppointmentBooking from "./AppointmentBooking";
+import ChangeMedicalRecord from "./ChangeMedicalRecord";
+import ViewPatientRecords from './ViewPatientRecords';
 // import { useState } from "react";
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
           <Route path="confirmation" element={<Confirmation />} />
           <Route path="home" element={<Home />} />
           <Route path="booking" element={<AppointmentBooking />} />
+          <Route path="changepatientrecord" element={<ChangeMedicalRecord />} />
+          <Route path="viewpatientrecords" element={<ViewPatientRecords />} />
           <Route
             path="patient-appointment-table"
             element={<AppointmentTable />}
