@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorSummary from "@govuk-react/error-summary";
+import { hashPassword } from "./Hashing";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -9,6 +10,7 @@ const Signup = () => {
     confirmPassword: "",
     userType: "",
   });
+
   const [errorMessage, setErrorMessage] = useState("");
   const [disMessage, setDisMessage] = useState("");
 
@@ -41,18 +43,24 @@ const Signup = () => {
     } else {
       console.log(data);
 
+      const requestData = {
+        username: data.username,
+        hash: hashPassword(data.password.toString()), // hashing password
+        userType: data.userType,
+      };
+
       fetch("http://localhost/gpsurgery/signup.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(requestData),
       })
         .then((response) => response.json())
         .then((response) => {
           if (response[0].status === "error") {
-            setErrorMessage("Username Already Exists.");
+            setErrorMessage("Login Failed");
             setDisMessage(response[0].message);
             console.log(response);
           } else {
@@ -60,9 +68,6 @@ const Signup = () => {
             navigate("/confirmation", { state: { data: data.username } });
           }
         })
-        // .then((data) => {
-        //   console.log(data);
-        // })
         .catch((error) => {
           console.error(error);
         });
@@ -98,12 +103,7 @@ const Signup = () => {
       <div className="govuk-grid-column-two-thirds">
         <h1 className="govuk-heading-xl">Enter your details</h1>
 
-        <form
-          className="form"
-          // action="/confirmation"
-          // method="POST"
-          onSubmit={handleSubmit}
-        >
+        <form className="form" onSubmit={handleSubmit}>
           <p className="govuk-body">
             This will only be used to create an account to use the GP Surgery
             Services.

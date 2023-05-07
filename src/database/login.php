@@ -23,32 +23,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $username = $data["username"];
   $hash = $data["hash"];
-  $userType = $data["userType"];
+  $accountNumber = "";
+  $userType = "";
 
   $userNameCheck = "SELECT * FROM login_credential WHERE username = '$username'";
   
   $check = mysqli_query($conn, $userNameCheck);
   
-  if(mysqli_num_rows($check) == 0){
-
-    $sql = "INSERT INTO login_credential (username, HASH, userType) VALUES ('$username', '$hash', '$userType')";
-
-    if ($conn->query($sql) === TRUE) {
-      $status = "success";
-      $message = "Account created successfully.";
-    } else {
-        // Other database error
-        $status = "error";
-        $message = "Error: " . $conn->error;
-      } 
+  if(mysqli_num_rows($check) != 0){
+    $row = mysqli_fetch_assoc($check);
+    $status = "success";
+    $storedHash = $row["hash"];
+    $accountNumber = $row["accountNumber"];
+    $userType = $row["userType"]; 
     }
   else {
-    // Duplicate entry error
     $status = "error";
-    $message = "Please enter a different username";
   }
 
-  $response[] = array("status" => $status, "message" => $message);
+  $response[] = array("status" => $status, "storedHash" => $storedHash, "accountNumber" => $accountNumber, "userType" => $userType);
   echo json_encode($response);
 }
 

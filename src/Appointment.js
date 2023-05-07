@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./styles.scss";
 
 function Appointment() {
   const [NHSNumber, setNhsNumber] = useState("");
@@ -12,12 +11,9 @@ function Appointment() {
       .catch((error) => console.error(error));
   }, []);
 
-  
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(
-      `/api/appointments?nhsNumber=${NHSNumber}`
-    );
+    const response = await fetch(`/api/appointments?nhsNumber=${NHSNumber}`);
     const data = await response.json();
     setAppointments(data);
   };
