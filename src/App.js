@@ -13,6 +13,8 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Start from "./Start";
 import AppointmentBooking from "./AppointmentBooking";
+
+
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import HeaderPublic from "./HeaderPublic";
@@ -40,6 +42,9 @@ function App() {
           <Route path="confirmation" element={<Confirmation />} />
           <Route path="home" element={<Home />} />
           <Route path="booking" element={<AppointmentBooking />} />
+          <Route path="changepatientrecord" element={<ChangeMedicalRecord />} />
+          <Route path="viewpatientrecords" element={<ViewPatientRecords />} />
+
           <Route path="patient-appointment" element={<AppointmentTable />} />
           <Route path="admin-appointment" element={<Appointment />} />
         </Routes>
@@ -95,6 +100,7 @@ function App() {
               <Route path="admin-profile" element={<ProfileAdmin />} />
             </>
           )}
+
           <Route
             path="*"
             element={<Navigate to={isLoggedIn ? "/home" : "/"} />}
