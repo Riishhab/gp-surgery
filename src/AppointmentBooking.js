@@ -110,7 +110,7 @@ function AppointmentBooking() {
               id="appointment-time"
               name="appointment-time"
             >
-              <option>Select a Time</option>
+              <option value="null">Select a Time</option>
               <option value="08:30">08:30</option>
               <option value="09:00">09:00</option>
               <option value="09:30">09:30</option>
