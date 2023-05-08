@@ -1,14 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserContext";
 
-function AppointmentTable() {
-  const [appointments, setAppointments] = useState([]);
+const AppointmentTable = () => {
+  const { NHSNumber } = useContext(UserContext);
+  const [Appointment, setAppointments] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/gpsurgery/PatientAppointment.php")
+    fetch(
+      `http://localhost:4000/gpsurgery/patientmedicalrecords.php?accountNumber=${NHSNumber}`
+    )
       .then((response) => response.json())
-      .then((data) => setAppointments(data))
-      .catch((error) => console.error(error));
-  }, []);
+      .then((data) => {
+        if (data.length > 0) {
+          setAppointments(data);
+        } else {
+          setAppointments([]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching medical records:", error);
+      });
+  }, [NHSNumber]);
 
   const handleDelete = (id) => {
     fetch(`/api/appointments/${id}`, {
@@ -17,7 +29,7 @@ function AppointmentTable() {
       .then((response) => response.json())
       .then((data) => {
         setAppointments(
-          appointments.filter((appointment) => appointment.id !== id)
+          Appointment.filter((appointment) => appointment.id !== id)
         );
       })
       .catch((error) => console.error(error));
@@ -48,21 +60,21 @@ function AppointmentTable() {
         </tr>
       </thead>
       <tbody className="govuk-table__body">
-        {appointments.map((appointment) => (
-          <tr className="govuk-table__row" key={appointment.id}>
+        {Appointment.map((Appointment) => (
+          <tr className="govuk-table__row" key={Appointment.id}>
             <td className="govuk-table__cell">
-              {appointment.dateOfAppointment}
+              {Appointment.dateOfAppointment}
             </td>
             <td className="govuk-table__cell">
-              {appointment.timeOfAppointment}
+              {Appointment.timeOfAppointment}
             </td>
-            <td className="govuk-table__cell">{appointment.patientName}</td>
-            <td className="govuk-table__cell">{appointment.doctorName}</td>
+            <td className="govuk-table__cell">{Appointment.patientName}</td>
+            <td className="govuk-table__cell">{Appointment.doctorName}</td>
             <td className="govuk-table__cell">
               <button
                 className="govuk-button govuk-button--warning"
                 data-module="govuk-button"
-                onClick={() => handleDelete(appointment.id)}
+                onClick={() => handleDelete(Appointment.id)}
               >
                 Delete
               </button>

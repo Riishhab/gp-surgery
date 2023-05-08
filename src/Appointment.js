@@ -1,16 +1,26 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
+import { UserContext } from "./UserContext";
 import "./styles.scss";
 
-function Appointment() {
-  const [appointments, setAppointments] = useState([]);
+const Appointment = () => {
+  const { accountNumber } = useContext(UserContext);
+  const [appointment, setAppointments] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/gpsurgery/AdminAppointment.php")
-      .then((response) => response.json())
-      .then((data) => setAppointments(data))
-      .catch((error) => console.error(error));
-  }, []);
+    fetch('http://localhost:4000/gpsurgery/AdminAppointment.php')
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.length > 0) {
+        setAppointments(data);
+      } else {
+        setAppointments([]);
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching medical records:", error);
+    });
+}, [accountNumber]);
 
   const handleDelete = (id) => {
     fetch(`/api/appointments/${id}`, {

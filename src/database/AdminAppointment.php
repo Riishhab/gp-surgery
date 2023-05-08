@@ -1,54 +1,37 @@
 <?php
-header("Access-Control-Allow-Origin: *"); //CORS header to enable any domain to send HTTP requests
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "gpsurgery";
-$id = '';
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, POST");
+header("Access-Control-Allow-Headers: Content-Type");
 
-$con = mysqli_connect($host, $user, $password, $dbname);
+try {
+    // Create a PDO instance
+    $pdo = new \PDO("sqlite:gpwebsite.db");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$method = $_SERVER['REQUEST_METHOD'];
+    $accountNumber = $_GET['accountNumber'];
 
+    // Prepare the SQL query
+    $sql = "SELECT appointmentNumber, medicalLicenseNumber, dateOfAppointment, timeOfAppintment, appointmentNotes FROM appointment";
+    $stmt = $pdo->prepare($sql);
 
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+    // Execute the query
+    if ($stmt->execute()) {
+        // Fetch all the rows as an associative array
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        // Convert the data to JSON format
+        $json = json_encode($rows);
 
-switch ($method) {
-    case 'GET':
-        $sql = "SELECT
-                A.appointmentNumber,
-                A.NHSNumber,
-                A.medicalLicenseNumber,
-                A.dateOfAppointment,
-                A.timeOfAppointment,
-                A.appointmentNotes
-            FROM
-                Appointment A";
-        break;
-}
+        // Set the content type header to application/json
+        header('Content-Type: application/json');
 
-// run SQL statement
-$result = mysqli_query($con, $sql);
-
-// die if SQL statement failed
-if (!$result) {
-    http_response_code(404);
-    die(mysqli_error($con));
-}
-
-if ($method == 'GET') {
-    if (!$id)
-        echo '[';
-    for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-        echo ($i > 0 ? ',' : '') . json_encode(mysqli_fetch_object($result));
+        // Output the JSON data
+        echo $json;
+    } else {
+        // Handle the error case
+        echo json_encode(['error' => 'Failed to fetch Appointments']);
     }
-    if (!$id)
-        echo ']';
-} else {
-    echo mysqli_affected_rows($con);
+} catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
 }
-
-$con->close();
+?>
