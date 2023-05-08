@@ -4,15 +4,16 @@ header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 try {
-    // Create a PDO instance
+    // PDO instance
     $pdo = new \PDO("sqlite:gpwebsite.db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $accountNumber = $_GET['accountNumber'];
 
-    // Prepare the SQL query
-    $sql = "SELECT medicalRecords FROM patient_record WHERE accountNumber = '$accountNumber'";
+    // SQL query
+    $sql = "SELECT medicalRecords FROM patient_record WHERE accountNumber = :accountNumber";
     $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':accountNumber', $accountNumber);
 
     // Execute the query
     if ($stmt->execute()) {
@@ -22,7 +23,7 @@ try {
         // Convert the data to JSON format
         $json = json_encode($rows);
 
-        // Set the content type header to application/json
+        // Content type header to application/json
         header('Content-Type: application/json');
 
         // Output the JSON data
