@@ -15,7 +15,6 @@ try {
     $data = json_decode(file_get_contents("php://input"), true);
 
     $username = $data["username"];
-    $hash = $data["hash"];
     $storedHash = "";
     $accountNumber = "";
     $userType = "";
