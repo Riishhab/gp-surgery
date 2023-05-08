@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "./UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorSummary from "@govuk-react/error-summary";
-import { comparePassword, hashPassword } from "./Hashing";
+import { comparePassword } from "./Hashing";
 
 const Login = () => {
   const [data, setData] = useState({
