@@ -49,7 +49,7 @@ const Signup = () => {
         userType: data.userType,
       };
 
-      fetch("http://localhost:4000/gpsurgery/signup.php", {
+      fetch("http://localhost:4000/backend/signup.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

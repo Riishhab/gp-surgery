@@ -5,7 +5,7 @@ function Appointment() {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/gpsurgery/AdminAppointment.php")
+    fetch("http://localhost:4000/backend/appointment-admin.php")
       .then((response) => response.json())
       .then((data) => setAppointments(data))
       .catch((error) => console.error(error));
