@@ -1,5 +1,5 @@
 -- CREATE TABLE Login_Credential (
---   accountNumber INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+--   accountNumber INTEGER PRIMARY KEY NOT NULL,
 --   username TEXT NOT NULL UNIQUE,
 --   hash TEXT NOT NULL,
 --   userType TEXT NOT NULL
@@ -65,7 +65,7 @@
 -- );
 
 -- CREATE TABLE Appointment (
---   appointmentNumber INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+--   appointmentNumber INTEGER PRIMARY KEY NOT NULL,
 --   NHSNumber INTEGER NOT NULL,
 --   medicalLicenseNumber INTEGER NOT NULL,
 --   dateOfAppointment DATE NOT NULL,
@@ -154,9 +154,9 @@
 -- (4, 'Medical records for patient 4', 456789123, 10010),
 -- (5, 'Medical records for patient 1', 123456890, 10007);
 
-DELETE FROM patient_record
-WHERE patientNo = 6;
-
+-- DELETE FROM patient_record
+-- WHERE patientNo = 6;
+-- PRAGMA table_info(Patient);
 
 SELECT * FROM Login_Credential;
 SELECT * FROM User_Information;

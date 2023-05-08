@@ -7,7 +7,7 @@ const MedicalRecords = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:4000/gpsurgery/patientmedicalrecords.php?accountNumber=${accountNumber}`
+      `http://localhost:4000/backend/medical-records-patient.php?accountNumber=${accountNumber}`
     )
       .then((response) => response.json())
       .then((data) => {

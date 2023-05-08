@@ -26,6 +26,9 @@ const Appointment = () => {
     fetch(`/api/appointments/${id}`, {
       method: "DELETE",
     })
+
+    fetch("http://localhost:4000/backend/appointment-admin.php")
+
       .then((response) => response.json())
       .then((data) => {
         setAppointments(

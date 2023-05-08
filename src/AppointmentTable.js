@@ -9,6 +9,8 @@ const AppointmentTable = () => {
     fetch(
       `http://localhost:4000/gpsurgery/patientmedicalrecords.php?accountNumber=${NHSNumber}`
     )
+
+    fetch("http://localhost:4000/backend/appointment-patient.php")
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {

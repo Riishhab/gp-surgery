@@ -33,7 +33,7 @@ const Login = () => {
         username: data.username,
         hash: hashPassword(data.password.toString()), // hashed password
       };
-      fetch("http://localhost:4000/gpsurgery/login.php", {
+      fetch("http://localhost:4000/backend/login.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

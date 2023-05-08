@@ -26,8 +26,7 @@ import ProfileAdmin from "./ProfileAdmin";
 import MedicalRecords from "./MedicalRecords";
 
 function App() {
-  const { isLoggedIn, userType, accountNumber, login, logout } =
-    useContext(UserContext);
+  const { isLoggedIn, userType } = useContext(UserContext);
 
   return (
     <Router>

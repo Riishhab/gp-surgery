@@ -9,8 +9,8 @@ function AppointmentBooking() {
   nextWeek.setDate(today.getDate() + 7); //adds 7 days onto todays date (exactly one week)
   const nextWeekString = nextWeek.toISOString().split("T")[0]; //formats the date as a string using ISO 8601 format, T splits it between date and time then [0] selects the date
 
-    const [successMessage, setSuccessMessage] = useState(null);
-    const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,59 +20,63 @@ function AppointmentBooking() {
       time: $("#appointment-time").val(),
       notes: $("#appointment-notes").val(),
     };
-      var url_appointment = "http://localhost:4000/bookappointment.php";
-      
+    var url_appointment = "http://localhost:4000/backend/book-appointment.php";
+
     jq.ajax({
       type: "POST",
       url: url_appointment,
       mode: "no-core",
       data: formData,
-        success(data) {
-            setErrorMessage("");
-            setSuccessMessage("Appointment successfully booked!");
-        },
-        error(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-            setSuccessMessage("");
-            setErrorMessage("Error booking appointment. Please Select a different date/time.");
-        },
+      success(data) {
+        setErrorMessage("");
+        setSuccessMessage("Appointment successfully booked!");
+      },
+      error(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+        setSuccessMessage("");
+        setErrorMessage(
+          "Error booking appointment. Please Select a different date/time."
+        );
+      },
     });
   };
 
   return (
-      <div>
-          {successMessage && (
-              <div className="govuk-notification-banner govuk-notification-banner--success" role="alert"
-                  aria-labelledby="govuk-notification-banner-title"
-                  data-module="govuk-notification-banner">
-                  <div className="govuk-notification-banner__header">
-                      <h2 className="govuk-notification-banner__title" id="govuk-notification-banner-title">
-                          Success
-                      </h2>
-                  </div>
-                  <div className="govuk-notification-banner__content">
-                      <h3 class="govuk-notification-banner__heading">
-                          {successMessage}
-                      </h3>
-                  </div>
-              </div>
-          )}
-          {errorMessage && (
-              <div className="govuk-error-summary" data-module="govuk-error-summary">
-                  <div role="alert">
-                      <h2 className="govuk-error-summary__title">
-                          Error
-                      </h2>
-                      <div className="govuk-error-summary__body">
-                          <h3 className="govuk-notification-banner__heading">
-                              {errorMessage}
-                          </h3>
-                      </div>
-                  </div>
-              </div>
-          )}
+    <div>
+      {successMessage && (
+        <div
+          className="govuk-notification-banner govuk-notification-banner--success"
+          role="alert"
+          aria-labelledby="govuk-notification-banner-title"
+          data-module="govuk-notification-banner"
+        >
+          <div className="govuk-notification-banner__header">
+            <h2
+              className="govuk-notification-banner__title"
+              id="govuk-notification-banner-title"
+            >
+              Success
+            </h2>
+          </div>
+          <div className="govuk-notification-banner__content">
+            <h3 class="govuk-notification-banner__heading">{successMessage}</h3>
+          </div>
+        </div>
+      )}
+      {errorMessage && (
+        <div className="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 className="govuk-error-summary__title">Error</h2>
+            <div className="govuk-error-summary__body">
+              <h3 className="govuk-notification-banner__heading">
+                {errorMessage}
+              </h3>
+            </div>
+          </div>
+        </div>
+      )}
       <form className="AppointmentBooking">
         <h1 className="govuk-heading-xl">
           <span className="govuk-caption-xl">Appointment Booking</span>
