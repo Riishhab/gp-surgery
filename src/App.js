@@ -5,16 +5,16 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import AppointmentTable from "./AppointmentTable";
-import Confirmation from "./Confirmation";
-import Footer from "./footer";
-import Home from "./Home";
-import Login from "./Login";
-import Signup from "./Signup";
-import Start from "./Start";
-import AppointmentBooking from "./AppointmentBooking";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
+import Start from "./Start";
+import Login from "./Login";
+import Signup from "./Signup";
+import Confirmation from "./Confirmation";
+import Home from "./Home";
+import AppointmentBooking from "./AppointmentBooking";
+import MedicalRecords from "./MedicalRecords";
+import ManageSurgery from "./ManageSurgery";
 import HeaderPublic from "./HeaderPublic";
 import HeaderPatient from "./HeaderPatient";
 import HeaderDoctor from "./HeaderDoctor";
@@ -22,29 +22,16 @@ import HeaderAdmin from "./HeaderAdmin";
 import ProfilePatient from "./ProfilePatient";
 import ProfileDoctor from "./ProfileDoctor";
 import ProfileAdmin from "./ProfileAdmin";
-import MedicalRecords from "./MedicalRecords";
+import AppointmentPatient from "./AppointmentPatient";
+import AppointmentDoctor from "./AppointmentDoctor";
 import AppointmentAdmin from "./AppointmentAdmin";
+import Footer from "./footer";
 
 function App() {
   const { isLoggedIn, userType } = useContext(UserContext);
 
   return (
     <Router>
-      {/* {loggedIn ? <Header2 /> : <Header />}
-      <Header />
-      <main className="govuk-width-container govuk-!-margin-top-7 govuk-!-margin-bottom-7">
-        <Routes>
-          <Route path="/" element={<Start />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="confirmation" element={<Confirmation />} />
-          <Route path="home" element={<Home />} />
-          <Route path="booking" element={<AppointmentBooking />} />
-          <Route path="patient-appointment" element={<AppointmentTable />} />
-          <Route path="admin-appointment" element={<Appointment />} />
-        </Routes>
-      </main> */}
-
       {!isLoggedIn ? (
         <HeaderPublic />
       ) : userType === "Patient" ? (
@@ -65,9 +52,10 @@ function App() {
           {isLoggedIn && userType === "Patient" && (
             <>
               <Route path="home" element={<Home />} />
+              <Route path="manage-surgery" element={<ManageSurgery />} />
               <Route
                 path="patient-appointment"
-                element={<AppointmentTable />}
+                element={<AppointmentPatient />}
               />
               <Route path="booking" element={<AppointmentBooking />} />
               <Route path="patient-profile" element={<ProfilePatient />} />
@@ -79,12 +67,11 @@ function App() {
           )}
           {isLoggedIn && userType === "Doctor" && (
             <>
-              {/* <Route
-                path="patient-appointment"
-                element={<AppointmentTable />}
-              /> */}
-              {/* <Route path="booking" element={<AppointmentBooking />} /> */}
               <Route path="home" element={<Home />} />
+              <Route
+                path="doctor-appointment"
+                element={<AppointmentDoctor />}
+              />
               <Route path="doctor-profile" element={<ProfileDoctor />} />
             </>
           )}

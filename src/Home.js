@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
-import { useContext } from "react";
 
 const Home = () => {
   const { userType } = useContext(UserContext);

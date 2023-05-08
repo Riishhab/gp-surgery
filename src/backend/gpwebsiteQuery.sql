@@ -178,3 +178,26 @@ INSERT INTO `patient_record` (`medicalRecords`, `NHSNumber`, `accountNumber`) VA
 INSERT INTO `patient_record` (`patientNo`, `medicalRecords`, `NHSNumber`, `accountNumber`) VALUES (NULL, 'May 2022: Medical records of patient. Diagnosis: Acute respiratory infection. Prescription: Amoxicillin 500mg, three times daily for 7 days. Allergies: None. Next Appointment: 2023-05-15, 10:30 AM Notes: Patient presented with cough, fever, and shortness of breath. Chest X-ray showed signs of lung infection. Prescribed Amoxicillin for treatment. Advised patient to rest and drink plenty of fluids. Follow-up appointment scheduled for further evaluation.', '789789', '10011');
 
 INSERT INTO `patient_record` (`patientNo`, `medicalRecords`, `NHSNumber`, `accountNumber`) VALUES (NULL, 'September 2022: Medical records of patient. Diagnosis: Diabetes Mellitus Type 2. Prescription: Metformin 1000mg, twice daily. Allergies: None. Next Appointment: 2023-07-10, 9:00 AM. Notes: Patient diagnosed with Diabetes Mellitus Type 2. Prescribed Metformin for glycemic control. Discussed the importance of a balanced diet, regular exercise, and monitoring blood sugar levels. Scheduled follow-up appointment to assess treatment progress and adjust medication if needed.', '789789', '10011');
+
+
+INSERT INTO Patient_Record (patientNo, medicalRecords, NHSNumber, accountNumber)
+VALUES
+(NULL, 'Patient Added to GP-SURGERY Local Database', 96937978331, 10012),
+(NULL, 'Patient Added to GP-SURGERY Local Database', 96938560901, 10013),
+(NULL, 'Patient Added to GP-SURGERY Local Database', 96938554691, 10014),
+(NULL, 'Patient Added to GP-SURGERY Local Database', 96937978171, 10015);
+
+INSERT INTO Appointment (appointmentNumber, NHSNumber, medicalLicenseNumber, dateOfAppointment, timeOfAppointment, appointmentNotes)
+VALUES
+(NULL, 96937978331, 123456, '2022-04-01', '10:00:00', 'Patient complains of persistent headaches.'),
+(NULL, 96938560901, 234567, '2022-04-02', '14:30:00', 'Patient requires follow-up for recent surgery.'),
+(NULL, 96938554691, 345678, '2022-04-03', '16:45:00', 'Patient needs referral to specialist.'),
+(NULL, 96937978171, 456789, '2022-04-04', '11:15:00', 'Patient reports chronic back pain.'),
+(NULL, 96937978331, 123456, '2022-11-18', '16:00:00', 'Patient complains of persistent headaches.'),
+(NULL, 96938560901, 345678, '2022-11-24', '11:30:00', 'Patient requires follow-up for recent surgery.'),
+(NULL, 96938554691, 234567, '2022-11-30', '16:45:00', 'Patient needs referral to specialist.'),
+(NULL, 96937978171, 456789, '2022-11-30', '12:15:00', 'Patient reports chronic head pain.'),
+(NULL, 96937978331, 456789, '2023-02-19', '15:00:00', 'Patient complains of persistent headaches.'),
+(NULL, 96938560901, 345678, '2023-02-23', '12:30:00', 'Patient requires follow-up for recent surgery.'),
+(NULL, 96938554691, 234567, '2023-02-15', '13:45:00', 'Patient needs referral to specialist.'),
+(NULL, 96937978171, 123456, '2023-02-25', '14:15:00', 'Patient reports chronic head pain.');

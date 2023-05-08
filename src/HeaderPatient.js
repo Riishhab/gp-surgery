@@ -8,7 +8,7 @@ const HeaderPatient = () => {
       <div className="govuk-header__container govuk-width-container">
         <div className="govuk-header__logo">
           <Link
-            to="/"
+            to="/home"
             className="govuk-header__link govuk-header__link--homepage"
           >
             <span className="govuk-header__logotype">
@@ -57,7 +57,7 @@ const HeaderPatient = () => {
                 </Link>
               </li>
               <li className="govuk-header__navigation-item">
-                <Link className="govuk-header__link" to="#">
+                <Link className="govuk-header__link" to="/manage-surgery">
                   Manage Surgery
                 </Link>
               </li>

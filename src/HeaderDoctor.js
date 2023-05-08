@@ -8,7 +8,7 @@ const HeaderDoctor = () => {
       <div className="govuk-header__container govuk-width-container">
         <div className="govuk-header__logo">
           <Link
-            to="/"
+            to="/home"
             className="govuk-header__link govuk-header__link--homepage"
           >
             <span className="govuk-header__logotype">

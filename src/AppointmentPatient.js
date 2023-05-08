@@ -1,24 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserContext";
 
-function AppointmentTable() {
+const AppointmentPatient = () => {
+  const { accountNumber } = useContext(UserContext);
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4000/backend/appointment-patient.php")
-      .then((response) => response.json())
-      .then((data) => setAppointments(data))
-      .catch((error) => console.error(error));
-  }, []);
+    fetch(
+      `http://localhost:4000/backend/appointment-patient.php?accountNumber=${accountNumber}`
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch appointments.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setAppointments(data);
+        } else {
+          setAppointments([]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setAppointments([]);
+      });
+  }, [accountNumber]);
+
+  //   useEffect(() => {
+  //     fetch(
+  //       `http://localhost:4000/backend/appointment-patient.php?accountNumber=${accountNumber}`
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => setAppointments(data))
+  //       .catch((error) => console.error(error));
+  //   }, [accountNumber]);
 
   const handleDelete = (id) => {
-    fetch(`/api/appointments/${id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `http://localhost:4000/backend/appointment-patient.php?appointmentNumber=${id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
-        setAppointments(
-          appointments.filter((appointment) => appointment.id !== id)
+        // Filter out the deleted appointment
+        const updatedAppointments = appointments.filter(
+          (appointment) => appointment.appointmentNumber !== id
         );
+
+        // Update the state with the filtered appointments
+        setAppointments(updatedAppointments);
       })
       .catch((error) => console.error(error));
   };
@@ -34,7 +68,7 @@ function AppointmentTable() {
             Date
           </th>
           <th scope="col" className="govuk-table__header">
-            time
+            Time
           </th>
           <th scope="col" className="govuk-table__header">
             Patient
@@ -49,7 +83,7 @@ function AppointmentTable() {
       </thead>
       <tbody className="govuk-table__body">
         {appointments.map((appointment) => (
-          <tr className="govuk-table__row" key={appointment.id}>
+          <tr className="govuk-table__row" key={appointment.appointmentNumber}>
             <td className="govuk-table__cell">
               {appointment.dateOfAppointment}
             </td>
@@ -62,7 +96,7 @@ function AppointmentTable() {
               <button
                 className="govuk-button govuk-button--warning"
                 data-module="govuk-button"
-                onClick={() => handleDelete(appointment.id)}
+                onClick={() => handleDelete(appointment.appointmentNumber)}
               >
                 Delete
               </button>
@@ -72,6 +106,6 @@ function AppointmentTable() {
       </tbody>
     </table>
   );
-}
+};
 
-export default AppointmentTable;
+export default AppointmentPatient;
