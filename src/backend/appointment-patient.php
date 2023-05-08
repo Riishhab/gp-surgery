@@ -4,11 +4,13 @@ header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 try {
-  // Create a PDO instance
+
   $pdo = new \PDO("sqlite:gpwebsite.db");
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+
   $NHSNumber = $_GET['NHSNumber'];
+
 
   // Prepare the SQL query
   $sql = "SELECT appointmentNumber, NHSNumber, medicalLicenseNumber, dateOfAppointment, timeOfAppointment, appointmentNotes FROM Appointment WHERE NHSNumber = '$NHSNumber'";
@@ -28,7 +30,7 @@ try {
     // Output the JSON data
     echo $json;
   } else {
-    // Handle the error case
+
     echo json_encode(['error' => 'Failed to fetch appointment details']);
   }
 } catch (PDOException $e) {

@@ -9,7 +9,6 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $accountNumber = $_GET['accountNumber'];
-
     // Prepare the SQL query
     $sql = "SELECT appointmentNumber, medicalLicenseNumber, dateOfAppointment, timeOfAppintment, appointmentNotes FROM appointment";
     $stmt = $pdo->prepare($sql);
