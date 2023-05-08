@@ -1,20 +1,16 @@
 <?php
-header("Access-Control-Allow-Origin: *"); //CORS header to enable any domain to send HTTP requests
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "gpsurgery";
-$id = '';
 
-$con = mysqli_connect($host, $user, $password, $dbname);
+header("Access-Control-Allow-Origin: *"); //CORS header
+header("Access-Control-Allow-Methods: GET, POST, DELETE");
 
-$method = $_SERVER['REQUEST_METHOD'];
-
-
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
+try {
+    $pdo = new PDO("sqlite:gpwebsite.db");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
 
+$method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
@@ -32,27 +28,45 @@ switch ($method) {
       JOIN doctor D ON
           A.medicalLicenseNumber = D.medicalLicenseNumber";
         break;
+    case 'DELETE':
+        $appointmentNumber = isset($_GET['appointmentNumber']) ? $_GET['appointmentNumber'] : null;
+
+        if ($appointmentNumber) {
+            $sql = "DELETE FROM Appointment WHERE appointmentNumber = :appointmentNumber";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':appointmentNumber', $appointmentNumber);
+
+            try {
+                $stmt->execute();
+                echo $stmt->rowCount();
+            } catch (PDOException $e) {
+                http_response_code(404);
+                die($e->getMessage());
+            }
+        } else {
+            http_response_code(400);
+            die("Invalid appointment number.");
+        }
+
+        break;
 }
 
-// run SQL statement
-$result = mysqli_query($con, $sql);
+try {
+    // Prepare and execute SQL statement
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-// die if SQL statement failed
-if (!$result) {
-    http_response_code(404);
-    die(mysqli_error($con));
-}
-
-if ($method == 'GET') {
-    if (!$id)
-        echo '[';
-    for ($i = 0; $i < mysqli_num_rows($result); $i++) {
-        echo ($i > 0 ? ',' : '') . json_encode(mysqli_fetch_object($result));
+    if ($method == 'GET') {
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data);
+    } else {
+        echo $stmt->rowCount();
     }
-    if (!$id)
-        echo ']';
-} else {
-    echo mysqli_affected_rows($con);
+} catch (PDOException $e) {
+    http_response_code(404);
+    die($e->getMessage());
 }
 
-$con->close();
+$pdo = null;
+
+?>

@@ -12,7 +12,6 @@ import Home from "./Home";
 import Login from "./Login";
 import Signup from "./Signup";
 import Start from "./Start";
-import Appointment from "./Appointment";
 import AppointmentBooking from "./AppointmentBooking";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
@@ -24,6 +23,7 @@ import ProfilePatient from "./ProfilePatient";
 import ProfileDoctor from "./ProfileDoctor";
 import ProfileAdmin from "./ProfileAdmin";
 import MedicalRecords from "./MedicalRecords";
+import AppointmentAdmin from "./AppointmentAdmin";
 
 function App() {
   const { isLoggedIn, userType } = useContext(UserContext);
@@ -91,7 +91,7 @@ function App() {
           {isLoggedIn && userType === "Admin" && (
             <>
               <Route path="home" element={<Home />} />
-              <Route path="admin-appointment" element={<Appointment />} />
+              <Route path="admin-appointment" element={<AppointmentAdmin />} />
               <Route path="admin-profile" element={<ProfileAdmin />} />
             </>
           )}
