@@ -1,4 +1,5 @@
 <?php
+// Author: Rishab
 
 header("Access-Control-Allow-Origin: *"); //CORS header
 header("Access-Control-Allow-Methods: GET, POST, DELETE");

@@ -1,3 +1,5 @@
+// Author: Rishab, Charlotte, Craig
+
 import React, { useEffect, useState, useContext } from "react";
 import { UserContext } from "./UserContext";
 

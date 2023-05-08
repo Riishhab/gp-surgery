@@ -1,4 +1,7 @@
 <?php
+
+// Author: Rishab
+
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *"); //CORS header to enable any domain to send HTTP requests
 header("Access-Control-Allow-Methods: POST");

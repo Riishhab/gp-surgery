@@ -1,5 +1,7 @@
 <?php
 
+// Author: Rishab, Charlotte
+
 header("Access-Control-Allow-Origin: *"); //CORS header to enable any domain to send HTTP requests
 header("Access-Control-Allow-Methods: GET, POST, DELETE");
 header("Access-Control-Allow-Headers: Content-Type");

@@ -1,5 +1,7 @@
 <?php
 
+// Author: Craig
+
 if(isset($_POST['date']) && $_POST['time']!="null"){
 
 header('Access-Control-Allow-Origin: *');

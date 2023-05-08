@@ -1,5 +1,7 @@
 <?php
 
+// Author: Rishab, Charlotte, Craig
+
 try {
     // Connect to the global database (vaccines.db)
     $globalPDO = new PDO("sqlite:vaccines.db");

@@ -1,3 +1,5 @@
+// Author: Rishab, Charlotte, Craig
+
 import bcrypt from "bcryptjs-react";
 
 const saltValue = 10;

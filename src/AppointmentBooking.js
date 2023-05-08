@@ -1,3 +1,5 @@
+// Author: Craig
+
 import React, { useState } from "react";
 import jq from "jquery";
 import $ from "jquery";

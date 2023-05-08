@@ -1,3 +1,5 @@
+// Author: Rishab
+
 import "./styles.scss";
 import {
   BrowserRouter as Router,

@@ -1,3 +1,5 @@
+// Author: Kaylee
+
 import React from "react";
 
 const ProfileDoctor = () => {

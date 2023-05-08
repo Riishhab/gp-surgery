@@ -1,3 +1,5 @@
+// Author: Danielius
+
 import React from "react";
 
 const ProfilePatient = () => {
