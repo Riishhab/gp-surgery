@@ -1,9 +1,13 @@
 <?php
+
+if(isset($_POST['date']) && $_POST['time']!="null"){
+
 header('Access-Control-Allow-Origin: *');
 
 $date = $_POST['date'];
 $time = $_POST['time'];
 $notes = $_POST['notes'];
+
 
 $pdo = new \PDO("sqlite:gpwebsite.db");
 
@@ -22,5 +26,9 @@ if (!$row) {
     $sql = "INSERT INTO Appointment (NHSNumber,medicalLicenseNumber, dateOfAppointment, timeOfAppointment, appointmentNotes) VALUES (?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([123, $doctor_id, $date, $time, $notes]);
+}
+}
+else{
+    header("HTTP/1.1 400 Bad Request");
 }
 ?>
