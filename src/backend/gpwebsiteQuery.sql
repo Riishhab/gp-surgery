@@ -156,7 +156,7 @@
 
 -- DELETE FROM patient_record
 -- WHERE patientNo = 6;
--- PRAGMA table_info(Patient);
+-- PRAGMA table_info(vaccines);
 
 SELECT * FROM Login_Credential;
 SELECT * FROM User_Information;

@@ -16,7 +16,7 @@ import Appointment from "./Appointment";
 import AppointmentBooking from "./AppointmentBooking";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
-import Header from "./Header";
+import HeaderPublic from "./HeaderPublic";
 import HeaderPatient from "./HeaderPatient";
 import HeaderDoctor from "./HeaderDoctor";
 import HeaderAdmin from "./HeaderAdmin";
@@ -46,7 +46,7 @@ function App() {
       </main> */}
 
       {!isLoggedIn ? (
-        <Header />
+        <HeaderPublic />
       ) : userType === "Patient" ? (
         <HeaderPatient />
       ) : userType === "Doctor" ? (
@@ -54,7 +54,7 @@ function App() {
       ) : userType === "Admin" ? (
         <HeaderAdmin />
       ) : (
-        <Header />
+        <HeaderPublic />
       )}
       <main className="govuk-width-container govuk-!-margin-top-7 govuk-!-margin-bottom-7">
         <Routes>
