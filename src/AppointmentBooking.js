@@ -61,7 +61,9 @@ function AppointmentBooking() {
             </h2>
           </div>
           <div className="govuk-notification-banner__content">
-            <h3 class="govuk-notification-banner__heading">{successMessage}</h3>
+            <h3 className="govuk-notification-banner__heading">
+              {successMessage}
+            </h3>
           </div>
         </div>
       )}
