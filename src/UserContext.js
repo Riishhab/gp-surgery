@@ -8,8 +8,7 @@ const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true" || false
   );
-  //   const [userType, setUserType] = useState("");
-  //   const [accountNumber, setAccountNumber] = useState("");
+
   const [userType, setUserType] = useState(
     localStorage.getItem("userType") || ""
   );

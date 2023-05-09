@@ -77,9 +77,9 @@ const Signup = () => {
   };
 
   /*
+  regex for password validation, not currently used.
   if(!preg_match('/[#\$\._!@&]/', $password)) {
-    echo json_encode(array("status" => "error", "message" => "Password should contain at least one special character (# $ . _ ! @ &)."));
-    exit();
+    "Password should contain at least one special character (# $ . _ ! @ &)."));
   }
   */
 
